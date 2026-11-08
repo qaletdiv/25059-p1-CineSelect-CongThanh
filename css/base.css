@@ -1,0 +1,50 @@
+/* ==========================================================================
+   BASE & RESET STYLES
+   ========================================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Geist", sans-serif;
+}
+
+body {
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Common Buttons */
+.btn {
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: solid 1px rgb(187, 175, 175);
+  font-size: 14px;
+  font-weight: 500;
+  background-color: rgb(40, 38, 38);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn--signIn {
+  background-color: transparent;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
+}
+
+.btn--signIn:hover {
+  background-color: white;
+  border-color: #94a3b8;
+}
+
+.btn--signUp {
+  background-color: #0f172a;
+  color: white;
+  border: 1px solid #0f172a;
+}
+
+.btn--signUp:hover {
+  background-color: #1e293b;
+}

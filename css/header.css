@@ -1,0 +1,47 @@
+/* Header */
+
+.header {
+  display: flex;
+  padding: 18px 40px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.5px solid rgb(215, 215, 215);
+  background-color: white;
+}
+
+/* Logo */
+.header__logo {
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 20px;
+  color: #0f172a;
+}
+
+/* Navigation */
+.header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: rgb(98, 91, 91);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: black;
+}
+
+/* Action buttons */
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

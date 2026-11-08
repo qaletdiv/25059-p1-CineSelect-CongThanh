@@ -1,0 +1,176 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CineSelect</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header__logo">
+        <p>CineSelect</p>
+      </div>
+
+      <nav class="header__nav">
+        <a href="#" class="nav-link">Discover</a>
+        <a href="#" class="nav-link">My list</a>
+        <a href="#" class="nav-link">About</a>
+      </nav>
+
+      <div class="header__actions">
+        <button class="btn btn--signIn">Sign in</button>
+        <button class="btn btn--signUp">Sign up</button>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="hero-text">
+        <h1 class="hero-title">Find a film worth your evening.</h1>
+
+        <p class="hero-desc">
+          A handpicked collection of stories, ready when you are. Browse by
+          mood, genre, or simply follow your curiosity.
+        </p>
+
+        <div class="search-bar">
+          <input
+            type="text"
+            placeholder="Search films, directors, genres..."
+            class="search-bar__input"
+          />
+          <button class="search-bar__btn">Search</button>
+        </div>
+      </div>
+
+      <div class="hero-top-film">
+        <p class="hero-top-film-title">The Wild Robot</p>
+        <p class="hero-top-film-decs">
+          A thoughtful story about finding connection courage, and place to call
+          home.
+        </p>
+      </div>
+    </section>
+
+    <section class="movies-gallery">
+      <div class="gallery-header">
+        <div class="gallery-header__title-group">
+          <p class="gallery-header__subtitle">THE COLLECTION</p>
+          <h2 class="gallery-header__title">Browse what feels right</h2>
+        </div>
+
+        <div class="filter-container">
+          <button class="gallery-header__more-btn">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+              <line x1="1" y1="14" x2="7" y2="14"></line>
+              <line x1="9" y1="8" x2="15" y2="8"></line>
+              <line x1="17" y1="16" x2="23" y2="16"></line>
+            </svg>
+            <span>More filters</span>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="genre-filters">
+        <button class="genre-btn genre-btn--active">All films</button>
+        <button class="genre-btn">Animation</button>
+        <button class="genre-btn">Drama</button>
+        <button class="genre-btn">Sci-Fi</button>
+        <button class="genre-btn">Comedy</button>
+        <button class="genre-btn">Mystery</button>
+      </div>
+
+      <div class="movies-grid"></div>
+    </section>
+
+    <div class="modal-backdrop" id="filter-modal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 class="modal-title">Select Genres</h3>
+          <button class="modal-close-btn" id="close-modal-btn">&times;</button>
+        </div>
+
+        <div class="modal-genres-list">
+          <label class="genre-checkbox-item">
+            <input type="checkbox" value="Action" />
+            <span>Action</span>
+          </label>
+          <label class="genre-checkbox-item">
+            <input type="checkbox" value="Adventure" />
+            <span>Adventure</span>
+          </label>
+          <label class="genre-checkbox-item">
+            <input type="checkbox" value="Animation" />
+            <span>Animation</span>
+          </label>
+          <label class="genre-checkbox-item">
+            <input type="checkbox" value="Comedy" />
+            <span>Comedy</span>
+          </label>
+          <label class="genre-checkbox-item">
+            <input type="checkbox" value="Crime" />
+            <span>Crime</span>
+          </label>
+          <label class="genre-checkbox-item">
+            <input type="checkbox" value="Drama" />
+            <span>Drama</span>
+          </label>
+          <label class="genre-checkbox-item">
+            <input type="checkbox" value="Sci-Fi" />
+            <span>Sci-Fi</span>
+          </label>
+          <label class="genre-checkbox-item">
+            <input type="checkbox" value="Mystery" />
+            <span>Mystery</span>
+          </label>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-reset" id="reset-filter-btn">Clear all</button>
+          <button class="btn-apply" id="apply-filter-btn">Apply Filters</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p class="footer-text">reelmark — a small place for good films.</p>
+      <p class="footer-text">&copy; 2026 CineSelect. All rights reserved.</p>
+    </footer>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

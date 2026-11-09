@@ -162,3 +162,37 @@ searchInput.addEventListener("input", (input) => {
   });
   renderMovies(filteredMovies);
 });
+
+//Advance Filter (visibility)
+const filterBtn = document.querySelector(".gallery-header__more-btn");
+const filterModal = document.querySelector(".modal-backdrop");
+const filterClsBtn = document.querySelector(".modal-close-btn");
+
+filterBtn.addEventListener("click", () => {
+  filterModal.classList.add("open");
+});
+
+filterClsBtn.addEventListener("click", () => {
+  filterModal.classList.remove("open");
+});
+
+//Advance Filter Btn Feature
+const applyFilterBtn = document.getElementById("#apply-filter-btn");
+
+applyFilterBtn.addEventListener("click", () => {
+  const checkBoxes = document.querySelectorAll(
+    ".modal-genres-list input:checked",
+  );
+
+  const selectedFilterGenres = Array.from(checkBoxes).map((cb) => cb.value);
+
+  if (selectedFilterGenres.length === 0) {
+    renderMovies(movies);
+  } else {
+    const filteredMovies = movies.filter((movie) => {
+      return selectedFilterGenres.includes(movie.genre);
+    });
+    renderMovies(filteredMovies);
+  }
+  filterModal.classList.remove("open");
+});

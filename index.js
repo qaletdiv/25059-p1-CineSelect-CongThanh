@@ -111,21 +111,107 @@ const genres = [
 ];
 
 const moviesGrid = document.querySelector(".movies-grid");
+const searchInput = document.querySelector(".search-bar__input");
+const sortBtn = document.querySelector("#sort-select");
+const ratingSelect = document.querySelector("#rating-select");
+const genreButtons = document.querySelectorAll(".genre-btn");
+const filterBtn = document.querySelector(".gallery-header__more-btn");
+const filterModal = document.querySelector(".modal-backdrop");
+const filterClsBtn = document.querySelector(".modal-close-btn");
+const applyFilterBtn = document.querySelector("#apply-filter-btn");
+const resetFilterBtn = document.querySelector("#reset-filter-btn");
 
-//render movie grid
+// Render movie grid
 function renderMovies(movieList) {
   moviesGrid.innerHTML = "";
+
+  if (movieList.length === 0) {
+    moviesGrid.innerHTML = `
+      <div class="no-movies-msg">
+        <p>No films found matching your criteria.</p>
+      </div>
+    `;
+    return;
+  }
 
   movieList.forEach((movie) => {
     const movieCard = document.createElement("div");
     movieCard.className = `${movie.className} movie-element`;
-    movieCard.innerHTML = `<h2>${movie.title}</h2>`;
+    movieCard.innerHTML = `
+      <h2>${movie.title}</h2>
+      <div class="movie-element__meta">
+        <span class="movie-element__rating">★ ${movie.rating}</span>
+        <span class="movie-element__tag">${movie.year} • ${movie.genre}</span>
+      </div>
+    `;
     moviesGrid.appendChild(movieCard);
   });
 }
 
-const genreButtons = document.querySelectorAll(".genre-btn");
+// Unified Filter & Sort Pipeline
+function applyAllFiltersAndSort() {
+  let result = [...moviesInfor];
 
+  // 1. Search keyword (Title or Genre)
+  const keyword = searchInput ? searchInput.value.trim().toLowerCase() : "";
+  if (keyword) {
+    result = result.filter((movie) => {
+      const titleMatch = movie.title.toLowerCase().includes(keyword);
+      const genreMatch = movie.genre.toLowerCase().includes(keyword);
+      return titleMatch || genreMatch;
+    });
+  }
+
+  // 2. Genre Filter (Modal checkboxes have priority, otherwise use quick genre button)
+  const checkedBoxes = document.querySelectorAll(
+    ".modal-genres-list input:checked",
+  );
+  const selectedModalGenres = Array.from(checkedBoxes).map((cb) => cb.value);
+
+  if (selectedModalGenres.length > 0) {
+    result = result.filter((movie) => selectedModalGenres.includes(movie.genre));
+  } else {
+    const currentGenreBtn = document.querySelector(".genre-btn--active");
+    if (currentGenreBtn) {
+      const selectedGenre = currentGenreBtn.textContent.trim();
+      if (selectedGenre !== "All films") {
+        result = result.filter((movie) => movie.genre === selectedGenre);
+      }
+    }
+  }
+
+  // 3. IMDb Rating Filter
+  if (ratingSelect) {
+    const selectedRating = ratingSelect.value;
+    if (selectedRating === "above-8") {
+      result = result.filter((movie) => movie.rating >= 8.0);
+    } else if (selectedRating === "7-8") {
+      result = result.filter(
+        (movie) => movie.rating >= 7.0 && movie.rating < 8.0,
+      );
+    } else if (selectedRating === "below-7") {
+      result = result.filter((movie) => movie.rating < 7.0);
+    }
+  }
+
+  // 4. Sort
+  if (sortBtn) {
+    const selectedSort = sortBtn.value;
+    if (selectedSort === "rating-desc") {
+      result.sort((a, b) => b.rating - a.rating);
+    } else if (selectedSort === "year-desc") {
+      result.sort((a, b) => b.year - a.year);
+    } else if (selectedSort === "title-asc") {
+      result.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (selectedSort === "title-desc") {
+      result.sort((a, b) => b.title.localeCompare(a.title));
+    }
+  }
+
+  renderMovies(result);
+}
+
+// Genre Quick Filter Buttons
 genreButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const currentGenreButton = document.querySelector(".genre-btn--active");
@@ -134,94 +220,81 @@ genreButtons.forEach((button) => {
     }
     button.classList.add("genre-btn--active");
 
-    const selectedGenre = button.textContent.trim();
-    if (selectedGenre === "All films") {
-      renderMovies(moviesInfor);
-    } else {
-      const filteredMovies = moviesInfor.filter((movie) => {
-        return movie.genre === selectedGenre;
-      });
-      renderMovies(filteredMovies);
+    // Uncheck modal checkboxes to avoid confusion
+    const checkBoxes = document.querySelectorAll(
+      ".modal-genres-list input:checked",
+    );
+    checkBoxes.forEach((cb) => (cb.checked = false));
+
+    applyAllFiltersAndSort();
+  });
+});
+
+// Search bar input
+if (searchInput) {
+  searchInput.addEventListener("input", applyAllFiltersAndSort);
+}
+
+// IMDb Rating filter change
+if (ratingSelect) {
+  ratingSelect.addEventListener("change", applyAllFiltersAndSort);
+}
+
+// Sort Button change
+if (sortBtn) {
+  sortBtn.addEventListener("change", applyAllFiltersAndSort);
+}
+
+// Advance Filter Modal Toggle
+if (filterBtn && filterModal && filterClsBtn) {
+  filterBtn.addEventListener("click", () => {
+    filterModal.classList.add("open");
+  });
+
+  filterClsBtn.addEventListener("click", () => {
+    filterModal.classList.remove("open");
+  });
+}
+
+// Advance Filter Modal Apply
+if (applyFilterBtn) {
+  applyFilterBtn.addEventListener("click", () => {
+    const checkBoxes = document.querySelectorAll(
+      ".modal-genres-list input:checked",
+    );
+    if (checkBoxes.length > 0) {
+      const currentGenreButton = document.querySelector(".genre-btn--active");
+      if (currentGenreButton) {
+        currentGenreButton.classList.remove("genre-btn--active");
+      }
     }
+    applyAllFiltersAndSort();
+    filterModal.classList.remove("open");
   });
-});
+}
 
-//Render the first time open the website
-renderMovies(moviesInfor);
-
-//Search bar
-
-const searchInput = document.querySelector(".search-bar__input");
-searchInput.addEventListener("input", (input) => {
-  const keyword = input.target.value.trim().toLowerCase();
-
-  const filteredMovies = moviesInfor.filter((movie) => {
-    const titleMatch = movie.title.toLowerCase().trim().includes(keyword);
-    const genreMatch = movie.genre.toLowerCase().trim().includes(keyword);
-    return titleMatch || genreMatch;
-  });
-  renderMovies(filteredMovies);
-});
-
-//Advance Filter (visibility)
-const filterBtn = document.querySelector(".gallery-header__more-btn");
-const filterModal = document.querySelector(".modal-backdrop");
-const filterClsBtn = document.querySelector(".modal-close-btn");
-
-filterBtn.addEventListener("click", () => {
-  filterModal.classList.add("open");
-});
-
-filterClsBtn.addEventListener("click", () => {
-  filterModal.classList.remove("open");
-});
-
-//Advance Filter Btn Feature
-const applyFilterBtn = document.querySelector("#apply-filter-btn");
-
-applyFilterBtn.addEventListener("click", () => {
-  const checkBoxes = document.querySelectorAll(
-    ".modal-genres-list input:checked",
-  );
-
-  const selectedFilterGenres = Array.from(checkBoxes).map((cb) => cb.value);
-
-  if (selectedFilterGenres.length === 0) {
-    renderMovies(moviesInfor);
-  } else {
-    const filteredMovies = moviesInfor.filter((movie) => {
-      return selectedFilterGenres.includes(movie.genre);
+// Advance Filter Modal Reset
+if (resetFilterBtn) {
+  resetFilterBtn.addEventListener("click", () => {
+    const checkBoxes = document.querySelectorAll(
+      ".modal-genres-list input:checked",
+    );
+    checkBoxes.forEach((checkbox) => {
+      checkbox.checked = false;
     });
-    renderMovies(filteredMovies);
-  }
-  filterModal.classList.remove("open");
-});
 
-const resetFilterBtn = document.querySelector("#reset-filter-btn");
+    // Re-select "All films" button
+    const allFilmsBtn = Array.from(genreButtons).find(
+      (b) => b.textContent.trim() === "All films",
+    );
+    if (allFilmsBtn) {
+      genreButtons.forEach((b) => b.classList.remove("genre-btn--active"));
+      allFilmsBtn.classList.add("genre-btn--active");
+    }
 
-resetFilterBtn.addEventListener("click", () => {
-  const checkBoxes = document.querySelectorAll(
-    ".modal-genres-list input:checked",
-  );
-  checkBoxes.forEach((checkbox) => {
-    checkbox.checked = false;
+    applyAllFiltersAndSort();
   });
-});
+}
 
-//Sort Button
-const sortBtn = document.querySelector("#sort-select");
-sortBtn.addEventListener("change", (factor) => {
-  const selectedSort = factor.target.value;
-  let moviesClone = [...moviesInfor];
-
-  if (selectedSort === "rating-desc") {
-    moviesClone.sort((a, b) => b.rating - a.rating);
-  } else if (selectedSort === "year-desc") {
-    moviesClone.sort((a, b) => b.year - a.year);
-  } else if (selectedSort === "title-asc") {
-    moviesClone.sort((a, b) => a.title.localeCompare(b.title));
-  } else if (selectedSort === "title-desc") {
-    moviesClone.sort((a, b) => b.title.localeCompare(a.title));
-  }
-  renderMovies(moviesClone);
-});
+// Render the first time open the website
+applyAllFiltersAndSort();

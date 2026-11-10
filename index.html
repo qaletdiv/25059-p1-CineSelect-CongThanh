@@ -73,6 +73,27 @@
 
         <div class="filter-container">
           <div class="sort-select-wrapper">
+            <select class="sort-select" id="rating-select">
+              <option value="all">IMDb: All Ratings</option>
+              <option value="above-8">★ Over 8.0</option>
+              <option value="7-8">★ 7.0 - 8.0</option>
+              <option value="below-7">★ Under 7.0</option>
+            </select>
+            <span class="sort-select-arrow">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </div>
+
+          <div class="sort-select-wrapper">
             <select class="sort-select" id="sort-select">
               <option value="default">Sort: Default</option>
               <option value="rating-desc">Highest Rating (★)</option>

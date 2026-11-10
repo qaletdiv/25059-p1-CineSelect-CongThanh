@@ -177,7 +177,7 @@ filterClsBtn.addEventListener("click", () => {
 });
 
 //Advance Filter Btn Feature
-const applyFilterBtn = document.getElementById("#apply-filter-btn");
+const applyFilterBtn = document.querySelector("#apply-filter-btn");
 
 applyFilterBtn.addEventListener("click", () => {
   const checkBoxes = document.querySelectorAll(
@@ -195,4 +195,15 @@ applyFilterBtn.addEventListener("click", () => {
     renderMovies(filteredMovies);
   }
   filterModal.classList.remove("open");
+});
+
+const resetFilterBtn = document.querySelector("#reset-filter-btn");
+
+resetFilterBtn.addEventListener("click", () => {
+  const checkBoxes = document.querySelectorAll(
+    ".modal-genres-list input:checked",
+  );
+  checkBoxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
 });

@@ -1,4 +1,4 @@
-const movies = [
+const moviesInfor = [
   {
     id: 1,
     title: "The Wild Robot",
@@ -136,9 +136,9 @@ genreButtons.forEach((button) => {
 
     const selectedGenre = button.textContent.trim();
     if (selectedGenre === "All films") {
-      renderMovies(movies);
+      renderMovies(moviesInfor);
     } else {
-      const filteredMovies = movies.filter((movie) => {
+      const filteredMovies = moviesInfor.filter((movie) => {
         return movie.genre === selectedGenre;
       });
       renderMovies(filteredMovies);
@@ -147,7 +147,7 @@ genreButtons.forEach((button) => {
 });
 
 //Render the first time open the website
-renderMovies(movies);
+renderMovies(moviesInfor);
 
 //Search bar
 
@@ -155,7 +155,7 @@ const searchInput = document.querySelector(".search-bar__input");
 searchInput.addEventListener("input", (input) => {
   const keyword = input.target.value.trim().toLowerCase();
 
-  const filteredMovies = movies.filter((movie) => {
+  const filteredMovies = moviesInfor.filter((movie) => {
     const titleMatch = movie.title.toLowerCase().trim().includes(keyword);
     const genreMatch = movie.genre.toLowerCase().trim().includes(keyword);
     return titleMatch || genreMatch;
@@ -187,9 +187,9 @@ applyFilterBtn.addEventListener("click", () => {
   const selectedFilterGenres = Array.from(checkBoxes).map((cb) => cb.value);
 
   if (selectedFilterGenres.length === 0) {
-    renderMovies(movies);
+    renderMovies(moviesInfor);
   } else {
-    const filteredMovies = movies.filter((movie) => {
+    const filteredMovies = moviesInfor.filter((movie) => {
       return selectedFilterGenres.includes(movie.genre);
     });
     renderMovies(filteredMovies);
@@ -206,4 +206,22 @@ resetFilterBtn.addEventListener("click", () => {
   checkBoxes.forEach((checkbox) => {
     checkbox.checked = false;
   });
+});
+
+//Sort Button
+const sortBtn = document.querySelector("#sort-select");
+sortBtn.addEventListener("change", (factor) => {
+  const selectedSort = factor.target.value;
+  let moviesClone = [...moviesInfor];
+
+  if (selectedSort === "rating-desc") {
+    moviesClone.sort((a, b) => b.rating - a.rating);
+  } else if (selectedSort === "year-desc") {
+    moviesClone.sort((a, b) => b.year - a.year);
+  } else if (selectedSort === "title-asc") {
+    moviesClone.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (selectedSort === "title-desc") {
+    moviesClone.sort((a, b) => b.title.localeCompare(a.title));
+  }
+  renderMovies(moviesClone);
 });

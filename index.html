@@ -72,6 +72,28 @@
         </div>
 
         <div class="filter-container">
+          <div class="sort-select-wrapper">
+            <select class="sort-select" id="sort-select">
+              <option value="default">Sort: Default</option>
+              <option value="rating-desc">Highest Rating (★)</option>
+              <option value="year-desc">Newest First</option>
+              <option value="title-asc">Title (A - Z)</option>
+              <option value="title-desc">Title (Z - A)</option>
+            </select>
+            <span class="sort-select-arrow">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </div>
+
           <button class="gallery-header__more-btn">
             <svg
               width="15"

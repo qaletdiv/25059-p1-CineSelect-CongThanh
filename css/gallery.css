@@ -1,4 +1,4 @@
-.movies-gallery {
+.gallery {
   display: flex;
   flex-direction: column;
   max-width: 1200px;
@@ -8,21 +8,21 @@
 }
 
 /* Gallery Header & Controls */
-.gallery-header {
+.gallery__header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 24px;
 }
 
-.gallery-header__subtitle {
+.gallery__subtitle {
   font-size: 13px;
   font-weight: 700;
   color: #64748b;
   letter-spacing: 1px;
 }
 
-.gallery-header__title {
+.gallery__title {
   font-size: 32px;
   font-weight: 800;
   color: #0f172a;
@@ -30,20 +30,20 @@
   letter-spacing: -0.5px;
 }
 
-.filter-container {
+.gallery__controls {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-/* Sort Dropdown */
-.sort-select-wrapper {
+/* Filter Dropdowns (Rating & Sort) */
+.filter-select {
   position: relative;
   display: inline-flex;
   align-items: center;
 }
 
-.sort-select {
+.filter-select__control {
   appearance: none;
   -webkit-appearance: none;
   background-color: #ffffff;
@@ -59,16 +59,16 @@
   transition: all 0.2s ease;
 }
 
-.sort-select:hover {
+.filter-select__control:hover {
   background-color: #f8fafc;
   border-color: #cbd5e1;
 }
 
-.sort-select:focus {
+.filter-select__control:focus {
   border-color: #94a3b8;
 }
 
-.sort-select-arrow {
+.filter-select__arrow {
   position: absolute;
   right: 14px;
   pointer-events: none;
@@ -77,7 +77,7 @@
   color: #64748b;
 }
 
-.gallery-header__more-btn {
+.gallery__more-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -93,13 +93,13 @@
   transition: all 0.2s ease;
 }
 
-.gallery-header__more-btn:hover {
+.gallery__more-btn:hover {
   background-color: #f8fafc;
   border-color: #cbd5e1;
 }
 
 /* Genre Filter Buttons */
-.genre-filters {
+.gallery__genres {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -139,14 +139,25 @@
   color: #ffffff;
 }
 
-/* Movies grid */
-.movies-grid {
+/* Movies Grid & Movie Card */
+.gallery__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-.movie-element {
+.gallery__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #64748b;
+  font-size: 16px;
+  background-color: #f8fafc;
+  border-radius: 16px;
+  border: 1px dashed #cbd5e1;
+}
+
+.movie-card {
   width: 100%;
   aspect-ratio: 3/4;
   border-radius: 20px;
@@ -160,14 +171,19 @@
     box-shadow 0.3s ease;
 }
 
-.movie-element h2 {
+.movie-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
+}
+
+.movie-card__title {
   font-size: 22px;
   font-weight: 500;
   margin: 0;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-.movie-element__meta {
+.movie-card__meta {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -176,7 +192,7 @@
   font-weight: 500;
 }
 
-.movie-element__rating {
+.movie-card__rating {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -189,60 +205,44 @@
   letter-spacing: 0.3px;
 }
 
-.movie-element__tag {
+.movie-card__tag {
   opacity: 0.9;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
-.no-movies-msg {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 60px 20px;
-  color: #64748b;
-  font-size: 16px;
-  background-color: #f8fafc;
-  border-radius: 16px;
-  border: 1px dashed #cbd5e1;
-}
-
-.movie-element:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
-}
-
-/* Movie poster gradients */
-.movie-1 {
+/* Movie Poster Gradients */
+.movie-card--bg-1 {
   background: linear-gradient(135deg, #a3c9bd 0%, #b8c4c2 40%, #c9b99f 100%);
 }
 
-.movie-2 {
+.movie-card--bg-2 {
   background: linear-gradient(135deg, #b58863 0%, #966746 50%, #6f4728 100%);
 }
 
-.movie-3 {
+.movie-card--bg-3 {
   background: linear-gradient(135deg, #94a3b8 0%, #788599 50%, #525d6e 100%);
 }
 
-.movie-4 {
+.movie-card--bg-4 {
   background: linear-gradient(135deg, #b592b5 0%, #7e6382 50%, #4a4563 100%);
 }
 
-.movie-5 {
+.movie-card--bg-5 {
   background: linear-gradient(135deg, #8e9e87 0%, #677561 50%, #465241 100%);
 }
 
-.movie-6 {
+.movie-card--bg-6 {
   background: linear-gradient(135deg, #d8b894 0%, #b8936e 50%, #876545 100%);
 }
 
-.movie-7 {
+.movie-card--bg-7 {
   background: linear-gradient(135deg, #3a506b 0%, #29384c 50%, #1c2541 100%);
 }
 
-.movie-8 {
+.movie-card--bg-8 {
   background: linear-gradient(135deg, #cca07c 0%, #ad7c58 50%, #825433 100%);
 }
 
-.movie-9 {
+.movie-card--bg-9 {
   background: linear-gradient(135deg, #577590 0%, #43aa8b 50%, #277da1 100%);
 }

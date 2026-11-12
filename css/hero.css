@@ -1,6 +1,6 @@
-/* hero section */
+/* Hero section */
 
-.hero-section {
+.hero {
   max-width: 1200px;
   margin: 60px auto 120px;
   padding: 0 40px;
@@ -12,21 +12,21 @@
 }
 
 /* Hero text content */
-.hero-text {
+.hero__content {
   display: flex;
   flex-direction: column;
   gap: 20px;
   max-width: 500px;
 }
 
-.hero-title {
+.hero__title {
   font-size: 52px;
   font-weight: 800;
   line-height: 1.15;
   color: #0f172a;
 }
 
-.hero-desc {
+.hero__desc {
   font-size: 16px;
   line-height: 1.6;
   color: #64748b;
@@ -77,7 +77,7 @@
 }
 
 /* Featured top film card */
-.hero-top-film {
+.hero__featured {
   border: 2px solid #cbd5e1;
   border-radius: 24px;
   background: linear-gradient(135deg, #a3c9bd 0%, #b8c4c2 40%, #c9b99f 100%);
@@ -89,12 +89,12 @@
   transition: transform 0.3s ease;
 }
 
-.hero-top-film:hover {
+.hero__featured:hover {
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12);
   transform: scale(1.03);
 }
 
-.hero-top-film-title {
+.hero__featured-title {
   font-size: 40px;
   font-weight: 500;
   margin-top: auto;

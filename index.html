@@ -24,23 +24,23 @@
       </div>
 
       <nav class="header__nav">
-        <a href="#" class="nav-link">Discover</a>
-        <a href="#" class="nav-link">My list</a>
-        <a href="#" class="nav-link">About</a>
+        <a href="#" class="header__nav-link">Discover</a>
+        <a href="#" class="header__nav-link">My list</a>
+        <a href="#" class="header__nav-link">About</a>
       </nav>
 
       <div class="header__actions">
-        <button class="btn btn--signIn">Sign in</button>
-        <button class="btn btn--signUp">Sign up</button>
+        <button class="btn btn--outline" id="sign-in-btn">Sign in</button>
+        <button class="btn btn--primary" id="sign-up-btn">Sign up</button>
       </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="hero-section">
-      <div class="hero-text">
-        <h1 class="hero-title">Find a film worth your evening.</h1>
+    <section class="hero">
+      <div class="hero__content">
+        <h1 class="hero__title">Find a film worth your evening.</h1>
 
-        <p class="hero-desc">
+        <p class="hero__desc">
           A handpicked collection of stories, ready when you are. Browse by
           mood, genre, or simply follow your curiosity.
         </p>
@@ -55,31 +55,32 @@
         </div>
       </div>
 
-      <div class="hero-top-film">
-        <p class="hero-top-film-title">The Wild Robot</p>
-        <p class="hero-top-film-decs">
+      <div class="hero__featured">
+        <p class="hero__featured-title">The Wild Robot</p>
+        <p class="hero__featured-desc">
           A thoughtful story about finding connection courage, and place to call
           home.
         </p>
       </div>
     </section>
 
-    <section class="movies-gallery">
-      <div class="gallery-header">
-        <div class="gallery-header__title-group">
-          <p class="gallery-header__subtitle">THE COLLECTION</p>
-          <h2 class="gallery-header__title">Browse what feels right</h2>
+    <!-- MOVIES GALLERY -->
+    <section class="gallery">
+      <div class="gallery__header">
+        <div class="gallery__title-group">
+          <p class="gallery__subtitle">THE COLLECTION</p>
+          <h2 class="gallery__title">Browse what feels right</h2>
         </div>
 
-        <div class="filter-container">
-          <div class="sort-select-wrapper">
-            <select class="sort-select" id="rating-select">
+        <div class="gallery__controls">
+          <div class="filter-select">
+            <select class="filter-select__control" id="rating-select">
               <option value="all">IMDb: All Ratings</option>
               <option value="above-8">★ Over 8.0</option>
               <option value="7-8">★ 7.0 - 8.0</option>
               <option value="below-7">★ Under 7.0</option>
             </select>
-            <span class="sort-select-arrow">
+            <span class="filter-select__arrow">
               <svg
                 width="14"
                 height="14"
@@ -93,15 +94,15 @@
             </span>
           </div>
 
-          <div class="sort-select-wrapper">
-            <select class="sort-select" id="sort-select">
+          <div class="filter-select">
+            <select class="filter-select__control" id="sort-select">
               <option value="default">Sort: Default</option>
               <option value="rating-desc">Highest Rating (★)</option>
               <option value="year-desc">Newest First</option>
               <option value="title-asc">Title (A - Z)</option>
               <option value="title-desc">Title (Z - A)</option>
             </select>
-            <span class="sort-select-arrow">
+            <span class="filter-select__arrow">
               <svg
                 width="14"
                 height="14"
@@ -115,7 +116,7 @@
             </span>
           </div>
 
-          <button class="gallery-header__more-btn">
+          <button class="gallery__more-btn" id="more-filters-btn">
             <svg
               width="15"
               height="15"
@@ -149,7 +150,7 @@
         </div>
       </div>
 
-      <div class="genre-filters">
+      <div class="gallery__genres">
         <button class="genre-btn genre-btn--active">All films</button>
         <button class="genre-btn">Animation</button>
         <button class="genre-btn">Drama</button>
@@ -158,61 +159,63 @@
         <button class="genre-btn">Mystery</button>
       </div>
 
-      <div class="movies-grid"></div>
+      <div class="gallery__grid"></div>
     </section>
 
-    <div class="modal-backdrop" id="filter-modal">
-      <div class="modal-card">
-        <div class="modal-header">
-          <h3 class="modal-title">Select Genres</h3>
-          <button class="modal-close-btn" id="close-modal-btn">&times;</button>
+    <!-- FILTER MODAL -->
+    <div class="modal" id="filter-modal">
+      <div class="modal__card">
+        <div class="modal__header">
+          <h3 class="modal__title">Select Genres</h3>
+          <button class="modal__close-btn" id="close-modal-btn">&times;</button>
         </div>
 
-        <div class="modal-genres-list">
-          <label class="genre-checkbox-item">
-            <input type="checkbox" value="Action" />
+        <div class="modal__genres-list">
+          <label class="modal__genre-item">
+            <input type="checkbox" class="modal__checkbox" value="Action" />
             <span>Action</span>
           </label>
-          <label class="genre-checkbox-item">
-            <input type="checkbox" value="Adventure" />
+          <label class="modal__genre-item">
+            <input type="checkbox" class="modal__checkbox" value="Adventure" />
             <span>Adventure</span>
           </label>
-          <label class="genre-checkbox-item">
-            <input type="checkbox" value="Animation" />
+          <label class="modal__genre-item">
+            <input type="checkbox" class="modal__checkbox" value="Animation" />
             <span>Animation</span>
           </label>
-          <label class="genre-checkbox-item">
-            <input type="checkbox" value="Comedy" />
+          <label class="modal__genre-item">
+            <input type="checkbox" class="modal__checkbox" value="Comedy" />
             <span>Comedy</span>
           </label>
-          <label class="genre-checkbox-item">
-            <input type="checkbox" value="Crime" />
+          <label class="modal__genre-item">
+            <input type="checkbox" class="modal__checkbox" value="Crime" />
             <span>Crime</span>
           </label>
-          <label class="genre-checkbox-item">
-            <input type="checkbox" value="Drama" />
+          <label class="modal__genre-item">
+            <input type="checkbox" class="modal__checkbox" value="Drama" />
             <span>Drama</span>
           </label>
-          <label class="genre-checkbox-item">
-            <input type="checkbox" value="Sci-Fi" />
+          <label class="modal__genre-item">
+            <input type="checkbox" class="modal__checkbox" value="Sci-Fi" />
             <span>Sci-Fi</span>
           </label>
-          <label class="genre-checkbox-item">
-            <input type="checkbox" value="Mystery" />
+          <label class="modal__genre-item">
+            <input type="checkbox" class="modal__checkbox" value="Mystery" />
             <span>Mystery</span>
           </label>
         </div>
 
-        <div class="modal-footer">
-          <button class="btn-reset" id="reset-filter-btn">Clear all</button>
-          <button class="btn-apply" id="apply-filter-btn">Apply Filters</button>
+        <div class="modal__footer">
+          <button class="modal__btn" id="reset-filter-btn">Clear all</button>
+          <button class="modal__btn" id="apply-filter-btn">Apply Filters</button>
         </div>
       </div>
     </div>
 
+    <!-- FOOTER -->
     <footer class="footer">
-      <p class="footer-text">reelmark — a small place for good films.</p>
-      <p class="footer-text">&copy; 2026 CineSelect. All rights reserved.</p>
+      <p class="footer__text">reelmark — a small place for good films.</p>
+      <p class="footer__text">&copy; 2026 CineSelect. All rights reserved.</p>
     </footer>
 
     <script src="./index.js"></script>

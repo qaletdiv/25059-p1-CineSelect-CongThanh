@@ -28,14 +28,14 @@
   font-size: 16px;
 }
 
-.nav-link {
+.header__nav-link {
   text-decoration: none;
   color: rgb(98, 91, 91);
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
-.nav-link:hover {
+.header__nav-link:hover {
   color: black;
 }
 

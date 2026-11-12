@@ -8,7 +8,7 @@ const moviesInfor = [
     year: 2024,
     duration: "1h 42m",
     rating: 8.4,
-    className: "movie-1",
+    className: "movie-card--bg-1",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const moviesInfor = [
     year: 2024,
     duration: "2h 46m",
     rating: 8.5,
-    className: "movie-2",
+    className: "movie-card--bg-2",
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const moviesInfor = [
     year: 2023,
     duration: "1h 46m",
     rating: 7.8,
-    className: "movie-3",
+    className: "movie-card--bg-3",
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const moviesInfor = [
     year: 2023,
     duration: "2h 20m",
     rating: 8.6,
-    className: "movie-4",
+    className: "movie-card--bg-4",
   },
   {
     id: 5,
@@ -52,7 +52,7 @@ const moviesInfor = [
     year: 2023,
     duration: "2h 31m",
     rating: 7.7,
-    className: "movie-5",
+    className: "movie-card--bg-5",
   },
   {
     id: 6,
@@ -63,7 +63,7 @@ const moviesInfor = [
     year: 2023,
     duration: "2h 13m",
     rating: 7.9,
-    className: "movie-6",
+    className: "movie-card--bg-6",
   },
   {
     id: 7,
@@ -74,7 +74,7 @@ const moviesInfor = [
     year: 2023,
     duration: "3h 00m",
     rating: 8.9,
-    className: "movie-7",
+    className: "movie-card--bg-7",
   },
   {
     id: 8,
@@ -85,7 +85,7 @@ const moviesInfor = [
     year: 2023,
     duration: "2h 21m",
     rating: 7.9,
-    className: "movie-8",
+    className: "movie-card--bg-8",
   },
   {
     id: 9,
@@ -96,7 +96,7 @@ const moviesInfor = [
     year: 2022,
     duration: "2h 19m",
     rating: 7.1,
-    className: "movie-9",
+    className: "movie-card--bg-9",
   },
 ];
 
@@ -110,14 +110,14 @@ const genres = [
   "Mystery",
 ];
 
-const moviesGrid = document.querySelector(".movies-grid");
+const moviesGrid = document.querySelector(".gallery__grid");
 const searchInput = document.querySelector(".search-bar__input");
-const sortBtn = document.querySelector("#sort-select");
+const sortSelect = document.querySelector("#sort-select");
 const ratingSelect = document.querySelector("#rating-select");
 const genreButtons = document.querySelectorAll(".genre-btn");
-const filterBtn = document.querySelector(".gallery-header__more-btn");
-const filterModal = document.querySelector(".modal-backdrop");
-const filterClsBtn = document.querySelector(".modal-close-btn");
+const moreFiltersBtn = document.querySelector("#more-filters-btn");
+const filterModal = document.querySelector("#filter-modal");
+const closeModalBtn = document.querySelector("#close-modal-btn");
 const applyFilterBtn = document.querySelector("#apply-filter-btn");
 const resetFilterBtn = document.querySelector("#reset-filter-btn");
 
@@ -127,7 +127,7 @@ function renderMovies(movieList) {
 
   if (movieList.length === 0) {
     moviesGrid.innerHTML = `
-      <div class="no-movies-msg">
+      <div class="gallery__empty">
         <p>No films found matching your criteria.</p>
       </div>
     `;
@@ -136,12 +136,12 @@ function renderMovies(movieList) {
 
   movieList.forEach((movie) => {
     const movieCard = document.createElement("div");
-    movieCard.className = `${movie.className} movie-element`;
+    movieCard.className = `movie-card ${movie.className}`;
     movieCard.innerHTML = `
-      <h2>${movie.title}</h2>
-      <div class="movie-element__meta">
-        <span class="movie-element__rating">★ ${movie.rating}</span>
-        <span class="movie-element__tag">${movie.year} • ${movie.genre}</span>
+      <h2 class="movie-card__title">${movie.title}</h2>
+      <div class="movie-card__meta">
+        <span class="movie-card__rating">★ ${movie.rating}</span>
+        <span class="movie-card__tag">${movie.year} • ${movie.genre}</span>
       </div>
     `;
     moviesGrid.appendChild(movieCard);
@@ -164,7 +164,7 @@ function applyAllFiltersAndSort() {
 
   // 2. Genre Filter (Modal checkboxes have priority, otherwise use quick genre button)
   const checkedBoxes = document.querySelectorAll(
-    ".modal-genres-list input:checked",
+    ".modal__genres-list .modal__checkbox:checked",
   );
   const selectedModalGenres = Array.from(checkedBoxes).map((cb) => cb.value);
 
@@ -195,8 +195,8 @@ function applyAllFiltersAndSort() {
   }
 
   // 4. Sort
-  if (sortBtn) {
-    const selectedSort = sortBtn.value;
+  if (sortSelect) {
+    const selectedSort = sortSelect.value;
     if (selectedSort === "rating-desc") {
       result.sort((a, b) => b.rating - a.rating);
     } else if (selectedSort === "year-desc") {
@@ -222,7 +222,7 @@ genreButtons.forEach((button) => {
 
     // Uncheck modal checkboxes to avoid confusion
     const checkBoxes = document.querySelectorAll(
-      ".modal-genres-list input:checked",
+      ".modal__genres-list .modal__checkbox:checked",
     );
     checkBoxes.forEach((cb) => (cb.checked = false));
 
@@ -240,19 +240,19 @@ if (ratingSelect) {
   ratingSelect.addEventListener("change", applyAllFiltersAndSort);
 }
 
-// Sort Button change
-if (sortBtn) {
-  sortBtn.addEventListener("change", applyAllFiltersAndSort);
+// Sort Select change
+if (sortSelect) {
+  sortSelect.addEventListener("change", applyAllFiltersAndSort);
 }
 
 // Advance Filter Modal Toggle
-if (filterBtn && filterModal && filterClsBtn) {
-  filterBtn.addEventListener("click", () => {
-    filterModal.classList.add("open");
+if (moreFiltersBtn && filterModal && closeModalBtn) {
+  moreFiltersBtn.addEventListener("click", () => {
+    filterModal.classList.add("modal--open");
   });
 
-  filterClsBtn.addEventListener("click", () => {
-    filterModal.classList.remove("open");
+  closeModalBtn.addEventListener("click", () => {
+    filterModal.classList.remove("modal--open");
   });
 }
 
@@ -260,7 +260,7 @@ if (filterBtn && filterModal && filterClsBtn) {
 if (applyFilterBtn) {
   applyFilterBtn.addEventListener("click", () => {
     const checkBoxes = document.querySelectorAll(
-      ".modal-genres-list input:checked",
+      ".modal__genres-list .modal__checkbox:checked",
     );
     if (checkBoxes.length > 0) {
       const currentGenreButton = document.querySelector(".genre-btn--active");
@@ -269,7 +269,7 @@ if (applyFilterBtn) {
       }
     }
     applyAllFiltersAndSort();
-    filterModal.classList.remove("open");
+    filterModal.classList.remove("modal--open");
   });
 }
 
@@ -277,7 +277,7 @@ if (applyFilterBtn) {
 if (resetFilterBtn) {
   resetFilterBtn.addEventListener("click", () => {
     const checkBoxes = document.querySelectorAll(
-      ".modal-genres-list input:checked",
+      ".modal__genres-list .modal__checkbox:checked",
     );
     checkBoxes.forEach((checkbox) => {
       checkbox.checked = false;

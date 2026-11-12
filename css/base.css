@@ -24,23 +24,23 @@ body {
   transition: all 0.2s ease;
 }
 
-.btn--signIn {
+.btn--outline {
   background-color: transparent;
   color: #1e293b;
   border: 1px solid #cbd5e1;
 }
 
-.btn--signIn:hover {
+.btn--outline:hover {
   background-color: white;
   border-color: #94a3b8;
 }
 
-.btn--signUp {
+.btn--primary {
   background-color: #0f172a;
   color: white;
   border: 1px solid #0f172a;
 }
 
-.btn--signUp:hover {
+.btn--primary:hover {
   background-color: #1e293b;
 }

@@ -169,7 +169,9 @@ function applyAllFiltersAndSort() {
   const selectedModalGenres = Array.from(checkedBoxes).map((cb) => cb.value);
 
   if (selectedModalGenres.length > 0) {
-    result = result.filter((movie) => selectedModalGenres.includes(movie.genre));
+    result = result.filter((movie) =>
+      selectedModalGenres.includes(movie.genre),
+    );
   } else {
     const currentGenreBtn = document.querySelector(".genre-btn--active");
     if (currentGenreBtn) {
@@ -298,3 +300,96 @@ if (resetFilterBtn) {
 
 // Render the first time open the website
 applyAllFiltersAndSort();
+
+// Authentication tabs
+const authTabs = document.querySelector("#auth-tabs");
+
+const signInForm = document.querySelector("#sign-in-form");
+const signUpForm = document.querySelector("#sign-up-form");
+
+authTabs.addEventListener("click", (e) => {
+  const clickedBtn = e.target.closest(".auth__tab");
+  if (!clickedBtn) return;
+
+  authTabs.querySelectorAll(".auth__tab").forEach((tab) => {
+    tab.classList.remove("auth__tab--active");
+  });
+
+  clickedBtn.classList.add("auth__tab--active");
+  if (clickedBtn.dataset.tab === "signup") {
+    authTabs.classList.add("auth__tabs--signup");
+
+    signInForm.classList.add("auth-form--hidden");
+    signUpForm.classList.remove("auth-form--hidden");
+  } else {
+    authTabs.classList.remove("auth__tabs--signup");
+
+    signUpForm.classList.add("auth-form--hidden");
+    signInForm.classList.remove("auth-form--hidden");
+  }
+});
+
+// Sign up event
+const registerError = document.querySelector("#register-error");
+
+signUpForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  registerError.textContent = "";
+
+  const userName = document.querySelector("#register-name").value.trim();
+  const email = document
+    .querySelector("#register-email")
+    .value.trim()
+    .toLowerCase();
+  const password = document.querySelector("#register-password").value;
+  const confirmPassword = document.querySelector("#register-confirm").value;
+
+  if (password.length < 8) {
+    registerError.textContent = "Password must be at least 8 characters.";
+    return;
+  }
+
+  const isValidPassword =
+    /[A-Z]/.test(password) &&
+    /[a-z]/.test(password) &&
+    /[0-9]/.test(password) &&
+    /[!@#$%^&*(),.?":{}|<>_-]/.test(password);
+
+  if (!isValidPassword) {
+    registerError.textContent =
+      "Password must contain at least one uppercase, lowercase, a number, and special character.";
+    return;
+  }
+
+  if (confirmPassword !== password) {
+    registerError.textContent =
+      "Confirm password not matching. Please enter the right password.";
+    return;
+  }
+
+  const users = JSON.parse(localStorage.getItem("cineSelect_users")) || [];
+  const isEmailExist = users.some((user) => user.email === email);
+
+  if (isEmailExist) {
+    registerError.textContent = "This email has already registered.";
+    return;
+  }
+
+  const newUser = {
+    name: userName,
+    email: email,
+    password: password,
+  };
+
+  users.push(newUser);
+  localStorage.setItem("cineSelect_users", JSON.stringify(users));
+
+  signUpForm.reset();
+  alert("Account created successfully! Please sign in.");
+
+  const signInTab = document.querySelector('.auth__tab[data-tab="signin"]');
+  if (signInTab) {
+    signInTab.click();
+  }
+});

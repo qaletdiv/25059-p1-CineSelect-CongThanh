@@ -439,7 +439,7 @@ function renderHeaderAuth() {
   if (currentUser) {
     headerActions.innerHTML = `
       <span class="user-greeting" style="font-weight: 500; font-size: 15px;">
-        Chào, <strong>${currentUser.name}</strong>
+        Hi, <strong>${currentUser.name}</strong>
       </span>
       <button class="btn btn--outline" id="logout-btn">Log out</button>
     `;
@@ -470,4 +470,3 @@ function renderHeaderAuth() {
 }
 
 renderHeaderAuth();
-

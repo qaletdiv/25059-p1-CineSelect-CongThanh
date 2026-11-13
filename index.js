@@ -393,3 +393,81 @@ signUpForm.addEventListener("submit", (e) => {
     signInTab.click();
   }
 });
+
+// -- Open and close auth modal --
+const authModal = document.querySelector("#auth-modal");
+const closeAuthBtn = document.querySelector("#close-auth-btn");
+
+function openAuthModal(tabName = "signin") {
+  if (!authModal) return;
+  authModal.classList.add("modal--open");
+
+  const targetTab = document.querySelector(`.auth__tab[data-tab="${tabName}"]`);
+  if (targetTab) {
+    targetTab.click();
+  }
+}
+
+function closeAuthModal() {
+  if (authModal) {
+    authModal.classList.remove("modal--open");
+  }
+}
+
+if (closeAuthBtn) {
+  closeAuthBtn.addEventListener("click", closeAuthModal);
+}
+
+if (authModal) {
+  authModal.addEventListener("click", (e) => {
+    if (e.target === authModal) {
+      closeAuthModal();
+    }
+  });
+}
+
+// -- Header user state --
+const headerActions = document.querySelector(".header__actions");
+
+function renderHeaderAuth() {
+  if (!headerActions) return;
+
+  const currentUser = JSON.parse(
+    localStorage.getItem("cineSelect_currentUser"),
+  );
+
+  if (currentUser) {
+    headerActions.innerHTML = `
+      <span class="user-greeting" style="font-weight: 500; font-size: 15px;">
+        Chào, <strong>${currentUser.name}</strong>
+      </span>
+      <button class="btn btn--outline" id="logout-btn">Log out</button>
+    `;
+
+    const logoutBtn = document.querySelector("#logout-btn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("cineSelect_currentUser");
+        renderHeaderAuth();
+      });
+    }
+  } else {
+    headerActions.innerHTML = `
+      <button class="btn btn--outline" id="sign-in-btn">Sign in</button>
+      <button class="btn btn--primary" id="sign-up-btn">Sign up</button>
+    `;
+
+    const signInBtn = document.querySelector("#sign-in-btn");
+    const signUpBtn = document.querySelector("#sign-up-btn");
+
+    if (signInBtn) {
+      signInBtn.addEventListener("click", () => openAuthModal("signin"));
+    }
+    if (signUpBtn) {
+      signUpBtn.addEventListener("click", () => openAuthModal("signup"));
+    }
+  }
+}
+
+renderHeaderAuth();
+

@@ -345,6 +345,11 @@ signUpForm.addEventListener("submit", (e) => {
   const password = document.querySelector("#register-password").value;
   const confirmPassword = document.querySelector("#register-confirm").value;
 
+  if (!userName) {
+    registerError.textContent = "Please enter your full name.";
+    return;
+  }
+  
   if (password.length < 8) {
     registerError.textContent = "Password must be at least 8 characters.";
     return;
@@ -394,13 +399,14 @@ signUpForm.addEventListener("submit", (e) => {
   }
 });
 
-// -- Open and close auth modal --
+// Open and close auth modal
 const authModal = document.querySelector("#auth-modal");
 const closeAuthBtn = document.querySelector("#close-auth-btn");
 
 function openAuthModal(tabName = "signin") {
   if (!authModal) return;
   authModal.classList.add("modal--open");
+  loadRememberedEmail();
 
   const targetTab = document.querySelector(`.auth__tab[data-tab="${tabName}"]`);
   if (targetTab) {
@@ -426,7 +432,27 @@ if (authModal) {
   });
 }
 
-// -- Header user state --
+// Toggle password visibility
+const togglePasswordButtons = document.querySelectorAll(
+  ".auth-form__toggle-pw",
+);
+
+togglePasswordButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const input = button.previousElementSibling;
+    if (!input) return;
+
+    if (input.type === "password") {
+      input.type = "text";
+      button.style.color = "#0f172a";
+    } else {
+      input.type = "password";
+      button.style.color = "#64748b";
+    }
+  });
+});
+
+// Header user state
 const headerActions = document.querySelector(".header__actions");
 
 function renderHeaderAuth() {
@@ -470,3 +496,61 @@ function renderHeaderAuth() {
 }
 
 renderHeaderAuth();
+
+// Sign-in form submission
+const loginError = document.querySelector("#login-error");
+const loginEmailInput = document.querySelector("#login-email");
+const loginPasswordInput = document.querySelector("#login-password");
+const rememberMeCheckbox = document.querySelector("#remember-me");
+
+if (signInForm) {
+  signInForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    loginError.textContent = "";
+
+    const email = loginEmailInput.value.trim().toLowerCase();
+    const password = loginPasswordInput.value;
+    const isRemember = rememberMeCheckbox.checked;
+
+    //  Check account in localStorage
+    const users = JSON.parse(localStorage.getItem("cineSelect_users")) || [];
+    const matchedUser = users.find(
+      (user) => user.email === email && user.password === password,
+    );
+
+    if (!matchedUser) {
+      loginError.textContent = "Invalid email or password.";
+      return;
+    }
+
+    //  Save active user session (excluding password)
+    const currentUser = {
+      name: matchedUser.name,
+      email: matchedUser.email,
+    };
+    localStorage.setItem("cineSelect_currentUser", JSON.stringify(currentUser));
+
+    //  Save or remove remembered email
+    if (isRemember) {
+      localStorage.setItem("cineSelect_rememberedEmail", email);
+    } else {
+      localStorage.removeItem("cineSelect_rememberedEmail");
+    }
+
+    // Reset form, close modal, and update header
+    signInForm.reset();
+    closeAuthModal();
+    renderHeaderAuth();
+  });
+}
+
+// Auto-fill remembered email
+function loadRememberedEmail() {
+  const rememberedEmail = localStorage.getItem("cineSelect_rememberedEmail");
+  if (rememberedEmail && loginEmailInput && rememberMeCheckbox) {
+    loginEmailInput.value = rememberedEmail;
+    rememberMeCheckbox.checked = true;
+  }
+}
+
+loadRememberedEmail();

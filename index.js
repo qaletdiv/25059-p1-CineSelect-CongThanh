@@ -2,9 +2,15 @@ const moviesInfor = [
   {
     id: 1,
     title: "The Wild Robot",
+    originalTitle: "The Wild Robot",
     genre: "Animation",
+    director: "Chris Sanders",
+    cast: "Lupita Nyong'o, Pedro Pascal, Kit Connor, Bill Nighy",
+    ageRating: "PG",
     description:
       "An intelligent robot shipwrecked on an uninhabited island must learn to adapt to its surroundings and form bonds with the native animals.",
+    synopsis:
+      "After a shipwreck, an intelligent robot named Roz is stranded on an uninhabited island. To survive the harsh wilderness, Roz must learn to adapt to her surroundings, gradually building warm relationships with the native wildlife and becoming the adoptive parent of an orphaned gosling.",
     year: 2024,
     duration: "1h 42m",
     rating: 8.4,
@@ -13,9 +19,15 @@ const moviesInfor = [
   {
     id: 2,
     title: "Dune: Part Two",
+    originalTitle: "Dune: Part Two",
     genre: "Sci-Fi",
+    director: "Denis Villeneuve",
+    cast: "Timothée Chalamet, Zendaya, Rebecca Ferguson, Javier Bardem",
+    ageRating: "PG-13",
     description:
       "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+    synopsis:
+      "Paul Atreides unites with Chani and the Fremen while on a warpath of revenge against the conspirators who destroyed his family. Facing a choice between the love of his life and the fate of the known universe, he endeavors to prevent a terrible future only he can foresee.",
     year: 2024,
     duration: "2h 46m",
     rating: 8.5,
@@ -24,9 +36,15 @@ const moviesInfor = [
   {
     id: 3,
     title: "Past Lives",
+    originalTitle: "Past Lives",
     genre: "Drama",
+    director: "Celine Song",
+    cast: "Greta Lee, Teo Yoo, John Magaro",
+    ageRating: "PG-13",
     description:
       "Nora and Hae Sung, two deeply connected childhood friends, are wrested apart after her family emigrates from South Korea.",
+    synopsis:
+      "Nora and Hae Sung are two deeply connected childhood friends in South Korea before Nora's family emigrates to Canada. Two decades later, they are reunited in New York for one fateful week as they confront notions of destiny ('In-Yun'), love, and the choices that make a life.",
     year: 2023,
     duration: "1h 46m",
     rating: 7.8,
@@ -35,9 +53,15 @@ const moviesInfor = [
   {
     id: 4,
     title: "Spider-Man: Across the Spider-Verse",
+    originalTitle: "Spider-Man: Across the Spider-Verse",
     genre: "Animation",
+    director: "Joaquim Dos Santos, Kemp Powers, Justin K. Thompson",
+    cast: "Shameik Moore, Hailee Steinfeld, Oscar Isaac, Daniel Kaluuya",
+    ageRating: "PG",
     description:
       "Miles Morales catapults across the Multiverse, where he encounters a team of Spider-People charged with protecting its very existence.",
+    synopsis:
+      "Miles Morales unexpectedly reunites with Gwen Stacy and is catapulted across the Multiverse, where he encounters the Spider-Society, a team of Spider-People charged with protecting its very existence. When the heroes clash on how to handle a new threat, Miles must redefine what it means to be a hero so he can save the people he loves most.",
     year: 2023,
     duration: "2h 20m",
     rating: 8.6,
@@ -46,9 +70,15 @@ const moviesInfor = [
   {
     id: 5,
     title: "Anatomy of a Fall",
+    originalTitle: "Anatomie d'une chute",
     genre: "Mystery",
+    director: "Justine Triet",
+    cast: "Sandra Hüller, Swann Arlaud, Milo Machado-Graner",
+    ageRating: "R",
     description:
       "A woman is suspected of her husband's murder, and their blind son faces a moral dilemma as the main witness.",
+    synopsis:
+      "A woman is suspected of murdering her husband after his body is found outside their isolated chalet in the French Alps. The ensuing trial becomes a tense psychological dissection, where their 11-year-old blind son—the sole witness—faces a profound moral dilemma.",
     year: 2023,
     duration: "2h 31m",
     rating: 7.7,
@@ -57,9 +87,15 @@ const moviesInfor = [
   {
     id: 6,
     title: "The Holdovers",
+    originalTitle: "The Holdovers",
     genre: "Comedy",
+    director: "Alexander Payne",
+    cast: "Paul Giamatti, Dominic Sessa, Da'Vine Joy Randolph",
+    ageRating: "R",
     description:
       "A cranky history teacher at a remote prep school is forced to remain on campus during the holidays with a troubled student.",
+    synopsis:
+      "A curmudgeonly ancient history instructor, universally disliked at a New England prep school, is forced to remain on campus during the 1970 Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them—a damaged, brainy troublemaker—and with the school's head cook, who has just lost a son in Vietnam.",
     year: 2023,
     duration: "2h 13m",
     rating: 7.9,
@@ -68,9 +104,15 @@ const moviesInfor = [
   {
     id: 7,
     title: "Oppenheimer",
+    originalTitle: "Oppenheimer",
     genre: "Drama",
+    director: "Christopher Nolan",
+    cast: "Cillian Murphy, Emily Blunt, Matt Damon, Robert Downey Jr.",
+    ageRating: "R",
     description:
       "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb during World War II.",
+    synopsis:
+      "An epic biographical thriller chronicling the life of theoretical physicist J. Robert Oppenheimer, who led the Manhattan Project to develop the first nuclear weapons for the United States during World War II, and the ensuing crisis of conscience and unfair political security hearing that followed.",
     year: 2023,
     duration: "3h 00m",
     rating: 8.9,
@@ -79,9 +121,15 @@ const moviesInfor = [
   {
     id: 8,
     title: "Poor Things",
+    originalTitle: "Poor Things",
     genre: "Comedy",
+    director: "Yorgos Lanthimos",
+    cast: "Emma Stone, Mark Ruffalo, Willem Dafoe, Ramy Youssef",
+    ageRating: "R",
     description:
       "The incredible tale about the fantastical evolution of Bella Baxter, a young woman brought back to life by the brilliant scientist Dr. Godwin Baxter.",
+    synopsis:
+      "The fantastical and bold tale of the evolution of Bella Baxter—a young woman brought back to life by the brilliant, eccentric, and unorthodox scientist Dr. Godwin Baxter. Hungry for freedom and the worldliness she is lacking, Bella runs off with a slick and debauched lawyer on a whirlwind adventure of self-liberation across the continents.",
     year: 2023,
     duration: "2h 21m",
     rating: 7.9,
@@ -90,9 +138,15 @@ const moviesInfor = [
   {
     id: 9,
     title: "Glass Onion",
+    originalTitle: "Glass Onion: A Knives Out Mystery",
     genre: "Mystery",
+    director: "Rian Johnson",
+    cast: "Daniel Craig, Edward Norton, Janelle Monáe, Kathryn Hahn",
+    ageRating: "PG-13",
     description:
       "Tech billionaire Miles Bron invites his friends for a getaway on his private Greek island. When someone turns up dead, Detective Benoit Blanc is on the case.",
+    synopsis:
+      "Tech billionaire Miles Bron invites his longtime circle of friends for a getaway at his lavish estate on a private Greek island to play a murder mystery game. However, when someone actually turns up dead, world-renowned detective Benoit Blanc steps in to peel back the layers of dark secrets hidden within the group.",
     year: 2022,
     duration: "2h 19m",
     rating: 7.1,
@@ -137,6 +191,7 @@ function renderMovies(movieList) {
   movieList.forEach((movie) => {
     const movieCard = document.createElement("div");
     movieCard.className = `movie-card ${movie.className}`;
+    movieCard.dataset.id = movie.id;
     movieCard.innerHTML = `
       <h2 class="movie-card__title">${movie.title}</h2>
       <div class="movie-card__meta">
@@ -349,7 +404,7 @@ signUpForm.addEventListener("submit", (e) => {
     registerError.textContent = "Please enter your full name.";
     return;
   }
-  
+
   if (password.length < 8) {
     registerError.textContent = "Password must be at least 8 characters.";
     return;
@@ -554,3 +609,138 @@ function loadRememberedEmail() {
 }
 
 loadRememberedEmail();
+
+function getRelatedMovies(currentMovie) {
+  const sameGenre = moviesInfor.filter(
+    (m) => m.id !== currentMovie.id && m.genre === currentMovie.genre,
+  );
+
+  if (sameGenre.length >= 3) {
+    return sameGenre.slice(0, 3);
+  }
+
+  const remainingCount = 3 - sameGenre.length;
+  const otherMovies = moviesInfor
+    .filter((m) => m.id !== currentMovie.id && m.genre !== currentMovie.genre)
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, remainingCount);
+
+  return [...sameGenre, ...otherMovies];
+}
+
+const closeDetailBtn = document.querySelector("#close-detail-btn");
+const movieDetailModal = document.querySelector("#movie-detail-modal");
+const movieDetailContent = document.querySelector("#movie-detail-content");
+
+function openMovieDetail(movieId) {
+  const movie = moviesInfor.find((m) => m.id === Number(movieId));
+  if (!movie || !movieDetailModal || !movieDetailContent) return;
+
+  const relatedMovies = getRelatedMovies(movie);
+
+  movieDetailContent.innerHTML = `
+    <div class="movie-detail__hero ${movie.className}">
+      <div class="movie-detail__badges">
+        <span class="badge badge--rating">★ ${movie.rating}</span>
+        <span class="badge badge--age">${movie.ageRating}</span>
+        <span class="badge badge--genre">${movie.genre}</span>
+      </div>
+      <h2 class="movie-detail__title">${movie.title}</h2>
+      ${movie.originalTitle !== movie.title ? `<p class="movie-detail__original-title">Tựa gốc: ${movie.originalTitle}</p>` : ""}
+      <div class="movie-detail__meta-row">
+        <span>${movie.year}</span> • <span>${movie.duration}</span>
+      </div>
+    </div>
+
+    <div class="movie-detail__body">
+      <div class="movie-detail__section">
+        <p class="movie-detail__label">Plot summary</p>
+        <p class="movie-detail__synopsis">${movie.synopsis}</p>
+      </div>
+
+      <div class="movie-detail__grid-info">
+        <div>
+          <p class="movie-detail__label">Director</p>
+          <p class="movie-detail__info-value">${movie.director}</p>
+        </div>
+        <div>
+          <p class="movie-detail__label">Casts</p>
+          <p class="movie-detail__info-value">${movie.cast}</p>
+        </div>
+      </div>
+
+      <!-- 3 Phim cùng thể loại gợi ý -->
+      <div class="movie-detail__related">
+        <h3 class="movie-detail__related-title">Gợi ý tác phẩm cùng thể loại</h3>
+        <div class="movie-detail__related-grid">
+          ${relatedMovies
+            .map(
+              (rel) => `
+            <div class="related-card ${rel.className}" data-id="${rel.id}">
+              <p class="related-card__title">${rel.title}</p>
+              <p class="related-card__meta">★ ${rel.rating} • ${rel.year}</p>
+            </div>
+          `,
+            )
+            .join("")}
+        </div>
+      </div>
+    </div>
+  `;
+
+  movieDetailModal.classList.add("modal--open");
+}
+
+// dectect movies element
+if (moviesGrid) {
+  moviesGrid.addEventListener("click", (e) => {
+    const card = e.target.closest(".movie-card");
+    if (card && card.dataset.id) {
+      openMovieDetail(card.dataset.id);
+    }
+  });
+}
+
+// close popup
+function closeMovieDetail() {
+  if (movieDetailModal) {
+    movieDetailModal.classList.remove("modal--open");
+  }
+}
+
+// Click directly into the close button
+if (closeDetailBtn) {
+  closeDetailBtn.addEventListener("click", closeMovieDetail);
+}
+
+// Click into backdrop blankspace
+if (movieDetailModal) {
+  movieDetailModal.addEventListener("click", (e) => {
+    if (e.target === movieDetailModal) {
+      closeMovieDetail();
+    }
+  });
+}
+
+// Using escape button
+document.addEventListener("keydown", (e) => {
+  if (
+    e.key === "Escape" &&
+    movieDetailModal &&
+    movieDetailModal.classList.contains("modal--open")
+  ) {
+    closeMovieDetail();
+  }
+});
+
+// Move to the related movie
+if (movieDetailContent) {
+  movieDetailContent.addEventListener("click", (e) => {
+    const relCard = e.target.closest(".related-card");
+    if (relCard && relCard.dataset.id) {
+      openMovieDetail(relCard.dataset.id);
+      const modalBox = movieDetailModal.querySelector(".modal__card--detail");
+      if (modalBox) modalBox.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+}
